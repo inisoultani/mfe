@@ -19,21 +19,9 @@ const App = () => {
     <Router history={history}>
       <StylesProvider generateClassName={generateClassName}>
         <div>
-          <Switch>
-            <CustomRoute path="/" exact>
-              {/* <Link to="/pricing">Open Pricing</Link> */}
-              {/* <Header history={history} /> */}
-              <MarketingApp />
-            </CustomRoute>
-            <CustomRoute path="/search">
-              <SearchApp />
-            </CustomRoute>
-            <Route path="/marketing" component={MarketingApp} />
-            <CustomRoute path="/pricing">
-              {/* <Header history={history} /> */}
-              <MarketingApp />
-            </CustomRoute>
-          </Switch>
+          <Header />
+          <MarketingApp />
+          <SearchApp />
         </div>
       </StylesProvider>
     </Router>

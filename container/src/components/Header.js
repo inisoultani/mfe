@@ -81,7 +81,7 @@ export default function Header({ signedIn, onSignOut, history }) {
           >
             App
           </Typography>
-          <Link to="/search">Search</Link>
+          <RouterLink to="/search">Search</RouterLink>
           <Button
             color="primary"
             variant="outlined"

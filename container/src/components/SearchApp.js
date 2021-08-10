@@ -7,10 +7,18 @@ const SearchApp = () => {
 
   useEffect(() => {
     console.log('search mount');
-    mount(searchRef.current, history);
+    const { onContainerNavigate } = mount(searchRef.current, {
+      onRemoteNavigate: (location) => {
+        if (history.location.pathname !== location.pathname) {
+          history.push(location.pathname);
+        }
+      },
+    });
+
+    history.listen(onContainerNavigate);
   }, [mount]);
 
-  return <div ref={searchRef}>test</div>;
+  return <div ref={searchRef}>searchdiv</div>;
 };
 
 export default SearchApp;

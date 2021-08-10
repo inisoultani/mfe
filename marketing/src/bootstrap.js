@@ -3,9 +3,19 @@ import ReactDOM from 'react-dom';
 import { createMemoryHistory } from 'history';
 
 import App from './App';
-const mount = (el, history) => {
+const mount = (el, { onRemoteNavigate }) => {
   const memoryHistory = createMemoryHistory();
-  ReactDOM.render(<App history={history} />, el);
+  ReactDOM.render(<App history={memoryHistory} />, el);
+
+   memoryHistory.listen(onRemoteNavigate);
+
+  return {
+    onContainerNavigate: (location) => {
+      if (memoryHistory.location.pathname !== location.pathname) {
+        memoryHistory.push(location.pathname);
+      }
+    },
+  };
 };
 
 if (process.env.NODE_ENV === 'development') {

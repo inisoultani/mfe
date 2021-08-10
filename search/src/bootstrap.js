@@ -1,16 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createMemoryHistory } from 'history';
+import App from './components/App';
 
-import Search from './components/Search';
+const mount = (el, { onRemoteNavigate }) => {
+  const memoryHistory = createMemoryHistory();
+  ReactDOM.render(<App history={memoryHistory} />, el);
 
-const mount = (el, history) => {
-  ReactDOM.render(<Search history={history} />, el);
+  memoryHistory.listen(onRemoteNavigate);
+
+  return {
+    onContainerNavigate: (location) => {
+      console.log('onContainerNavigate');
+      if (memoryHistory.location.pathname !== location.pathname) {
+        memoryHistory.push(location.pathname);
+      }
+    },
+  };
 };
 
 if (process.env.NODE_ENV === 'development') {
   const el = document.querySelector('#dev-search');
   if (el) {
-    mount(el);
+    mount(el, {});
   }
 }
 

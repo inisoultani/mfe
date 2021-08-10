@@ -5,11 +5,12 @@ import { Route } from 'react-router-dom';
 import Header from './Header';
 import history from '../history';
 
-const CustomRoute = ({ children }) => {
+const CustomRoute = (props) => {
+  console.log(props);
   return (
-    <Route>
+    <Route {...props}>
       <Header history={history} />
-      {children}
+      {props.children}
     </Route>
   );
 };

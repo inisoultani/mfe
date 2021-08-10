@@ -1,6 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
-const Search = ({ history }) => {
+const Search = () => {
+  const history = useHistory();
+
   const onClick = () => {
     if (history) {
       history.push('/');
