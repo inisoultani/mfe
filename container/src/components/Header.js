@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link, Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header({ signedIn, onSignOut }) {
+export default function Header({ signedIn, onSignOut, history }) {
   const classes = useStyles();
 
   const onClick = () => {
@@ -81,6 +81,7 @@ export default function Header({ signedIn, onSignOut }) {
           >
             App
           </Typography>
+          <Link to="/search">Search</Link>
           <Button
             color="primary"
             variant="outlined"
