@@ -6,9 +6,9 @@ import {
   StylesProvider,
   createGenerateClassName,
 } from '@material-ui/core/styles';
-import SearchApp from './components/SearchApp';
 import history from './history';
-import CustomRoute from './components/CustomRoute';
+
+const SearchApp = React.lazy(() => import('./components/SearchApp'));
 
 const generateClassName = createGenerateClassName({
   productionPrefix: 'con',
@@ -21,7 +21,9 @@ const App = () => {
         <div>
           <Header />
           <MarketingApp />
-          <SearchApp />
+          <React.Suspense fallback={<div>Loading</div>}>
+            <SearchApp />
+          </React.Suspense>
         </div>
       </StylesProvider>
     </Router>

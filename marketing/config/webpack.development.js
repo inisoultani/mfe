@@ -3,13 +3,17 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 
-const devConfig = {
+const devConfig = (env) => ({
   mode: 'development',
   devServer: {
     port: 8081,
-    historyApiFallback: {
-      index: 'index.html',
-    },
+    historyApiFallback: true,
+  },
+  output: {
+    publicPath:
+      env.mode === 'development'
+        ? 'http://localhost:8081/'
+        : 'https://prod.test.com/',
   },
   plugins: [
     new ModuleFederationPlugin({
@@ -21,6 +25,9 @@ const devConfig = {
       shared: packageJson.dependencies,
     }),
   ],
-};
+});
 
-module.exports = merge(commonConfig, devConfig);
+module.exports = (_, env) => {
+  console.log(env);
+  return merge(commonConfig, devConfig(env));
+};

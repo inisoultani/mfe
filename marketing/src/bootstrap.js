@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createMemoryHistory } from 'history';
+import { createMemoryHistory, createBrowserHistory } from 'history';
 
 import App from './App';
-const mount = (el, { onRemoteNavigate }) => {
-  const memoryHistory = createMemoryHistory();
+const mount = (el, { onRemoteNavigate, defaultHistory }) => {
+  const memoryHistory = defaultHistory || createMemoryHistory();
   ReactDOM.render(<App history={memoryHistory} />, el);
 
-   memoryHistory.listen(onRemoteNavigate);
+  if (onRemoteNavigate) {
+    memoryHistory.listen(onRemoteNavigate);
+  }
 
   return {
     onContainerNavigate: (location) => {
@@ -21,7 +23,7 @@ const mount = (el, { onRemoteNavigate }) => {
 if (process.env.NODE_ENV === 'development') {
   const el = document.querySelector('#dev-marketing-root');
   if (el) {
-    mount(el);
+    mount(el, { defaultHistory: createBrowserHistory() });
   }
 }
 
