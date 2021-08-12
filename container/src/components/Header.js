@@ -81,7 +81,16 @@ export default function Header({ signedIn, onSignOut, history }) {
           >
             App
           </Typography>
-          <RouterLink to="/search">Search</RouterLink>
+          {/* <RouterLink to="/search">Search</RouterLink> */}
+          <Typography
+            variant="h6"
+            color="inherit"
+            noWrap
+            component={RouterLink}
+            to="/search"
+          >
+            Search
+          </Typography>
           <Button
             color="primary"
             variant="outlined"

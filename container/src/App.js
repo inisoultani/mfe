@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Route, Switch, Link } from 'react-router-dom';
 import MarketingApp from './components/MarketingApp';
+import AuthApp from './components/AuthApp';
 import Header from './components/Header';
 import {
   StylesProvider,
@@ -20,10 +21,15 @@ const App = () => {
       <StylesProvider generateClassName={generateClassName}>
         <div>
           <Header />
-          <MarketingApp />
-          <React.Suspense fallback={<div>Loading</div>}>
-            <SearchApp />
-          </React.Suspense>
+          <Switch>
+            <Route path="/auth" component={AuthApp} />
+            <Route path="/search">
+              <React.Suspense fallback={<div>Loading</div>}>
+                <SearchApp />
+              </React.Suspense>
+            </Route>
+            <Route path="/" component={MarketingApp} />
+          </Switch>
         </div>
       </StylesProvider>
     </Router>

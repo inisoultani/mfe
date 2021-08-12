@@ -4,7 +4,11 @@ import { createMemoryHistory, createBrowserHistory } from 'history';
 
 import App from './App';
 const mount = (el, { onRemoteNavigate, defaultHistory }) => {
-  const memoryHistory = defaultHistory || createMemoryHistory();
+  const memoryHistory =
+    defaultHistory ||
+    createMemoryHistory({
+      initialEntries: ['/'],
+    });
   ReactDOM.render(<App history={memoryHistory} />, el);
 
   if (onRemoteNavigate) {
