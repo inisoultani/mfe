@@ -54,11 +54,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header({ signedIn, onSignOut, history }) {
+export default function Header({ isSignedIn, onSignOut, history }) {
   const classes = useStyles();
 
   const onClick = () => {
-    if (signedIn && onSignOut) {
+    if (isSignedIn && onSignOut) {
       onSignOut();
     }
   };
@@ -82,7 +82,7 @@ export default function Header({ signedIn, onSignOut, history }) {
             App
           </Typography>
           {/* <RouterLink to="/search">Search</RouterLink> */}
-          <Typography
+          {/* <Typography
             variant="h6"
             color="inherit"
             noWrap
@@ -90,16 +90,16 @@ export default function Header({ signedIn, onSignOut, history }) {
             to="/search"
           >
             Search
-          </Typography>
+          </Typography> */}
           <Button
             color="primary"
             variant="outlined"
             className={classes.link}
             component={RouterLink}
-            to={signedIn ? '/' : '/auth/signin'}
+            to={isSignedIn ? '/' : '/auth/signin'}
             onClick={onClick}
           >
-            {signedIn ? 'Logout' : 'Login'}
+            {isSignedIn ? 'Logout' : 'Login'}
           </Button>
         </Toolbar>
       </AppBar>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { mount } from 'auth/AuthApp';
 import history from '../history';
 
-const AuthApp = () => {
+const AuthApp = ({ onSignIn }) => {
   const authRef = useRef(null);
 
   useEffect(() => {
@@ -13,6 +13,7 @@ const AuthApp = () => {
           history.push(location.pathname);
         }
       },
+      onSignIn,
     });
 
     history.listen(onContainerNavigate);
