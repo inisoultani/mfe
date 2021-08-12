@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "webpack serve --config config/webpack.development.js --mode development",
-    "build:dev": "webpack --config config/webpack.production.js",
+    "build": "webpack --config config/webpack.production.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
