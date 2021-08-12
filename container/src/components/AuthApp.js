@@ -6,7 +6,7 @@ const AuthApp = ({ onSignIn }) => {
   const authRef = useRef(null);
 
   useEffect(() => {
-    console.log('search mount');
+    // console.log('search mount');
     const { onContainerNavigate } = mount(authRef.current, {
       onRemoteNavigate: (location) => {
         if (history.location.pathname !== location.pathname) {
