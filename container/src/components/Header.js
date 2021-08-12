@@ -81,6 +81,20 @@ export default function Header({ isSignedIn, onSignOut, history }) {
           >
             App
           </Typography>
+          {isSignedIn ? (
+            <Typography
+              variant="h6"
+              color="inherit"
+              noWrap
+              component={RouterLink}
+              to="/dashboard"
+            >
+              Dashboard
+            </Typography>
+          ) : (
+            ''
+          )}
+
           {/* <RouterLink to="/search">Search</RouterLink> */}
           {/* <Typography
             variant="h6"

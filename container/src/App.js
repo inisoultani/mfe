@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Router, Route, Switch, Link } from 'react-router-dom';
+import { Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 
 import Header from './components/Header';
 import {
@@ -13,6 +13,7 @@ import LoadingBar from './components/Loading';
 const SearchApp = React.lazy(() => import('./components/SearchApp'));
 const MarketingApp = React.lazy(() => import('./components/MarketingApp'));
 const AuthApp = React.lazy(() => import('./components/AuthApp'));
+const DashboardApp = React.lazy(() => import('./components/DashboardApp'));
 
 const generateClassName = createGenerateClassName({
   productionPrefix: 'con',
@@ -23,6 +24,7 @@ const App = () => {
 
   useEffect(() => {
     console.log('isSignedIn triggered on container App');
+    if (isSignedIn) history.push('/dashboard');
   }, [isSignedIn]);
 
   return (
@@ -39,7 +41,14 @@ const App = () => {
               <Route path="/auth">
                 <AuthApp onSignIn={() => setIsSignedIn(true)} />
               </Route>
+
               <Route path="/search" component={SearchApp} />
+
+              <Route path="/dashboard">
+                {!isSignedIn && <Redirect to="/" />}
+                <DashboardApp />
+              </Route>
+
               <Route path="/" component={MarketingApp} />
             </Switch>
           </React.Suspense>
