@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import { createMemoryHistory, createBrowserHistory } from 'history';
 
 import App from './App';
-const mount = (el, { onRemoteNavigate, defaultHistory }) => {
+const mount = (el, { onRemoteNavigate, defaultHistory, initialEntry }) => {
   const memoryHistory =
     defaultHistory ||
     createMemoryHistory({
-      initialEntries: ['/'],
+      initialEntries: [initialEntry ? initialEntry : '/'],
     });
   ReactDOM.render(<App history={memoryHistory} />, el);
 
